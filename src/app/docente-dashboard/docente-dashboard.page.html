@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Reportes de Asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Botones para filtrar por tipo de reporte -->
+  <ion-button (click)="loadDailyReports()">Reporte Diario</ion-button>
+  <ion-button (click)="loadWeeklyReports()">Reporte Semanal</ion-button>
+  <ion-button (click)="loadMonthlyReports()">Reporte Mensual</ion-button>
+  <ion-button (click)="generatePDF()">Generar Reporte PDF</ion-button>
+  <ion-button (click)="generateExcel()">Generar Reporte Excel</ion-button>
+  <!-- Filtros -->
+  <ion-item>
+    <ion-label>Nombre</ion-label>
+    <ion-input [(ngModel)]="nameFilter"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Departamento</ion-label>
+    <ion-select [(ngModel)]="departmentFilter">
+      <ion-select-option value="IT">IT</ion-select-option>
+      <ion-select-option value="HR">HR</ion-select-option>
+      <ion-select-option value="Finance">Finance</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Fecha de Inicio</ion-label>
+    <ion-datetime [(ngModel)]="startDate" displayFormat="YYYY-MM-DD"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Fecha de Fin</ion-label>
+    <ion-datetime [(ngModel)]="endDate" displayFormat="YYYY-MM-DD"></ion-datetime>
+  </ion-item>
+
+  <ion-button expand="full" (click)="applyFilters()">Aplicar Filtros</ion-button>
+
+  <!-- Lista de reportes -->
+  <ion-list>
+    <ion-item *ngFor="let report of reports">
+      <ion-label>
+        <h2>{{ report.name }}</h2>
+        <p>{{ report.department }}</p>
+        <p>{{ report.datetime | date:'short' }}</p> <!-- Muestra la fecha y hora del reporte -->
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

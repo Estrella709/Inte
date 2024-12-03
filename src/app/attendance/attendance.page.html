@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="usuarioForm" (ngSubmit)="registerUser()">
+    <ion-item>
+      <ion-label>Nombre del Docente</ion-label>
+      <ion-input formControlName="docente" placeholder="Nombre"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>Tipo de Asistencia</ion-label>
+      <ion-select formControlName="tipoAsistencia">
+        <ion-select-option value="asistencia">Asistencia</ion-select-option>
+        <ion-select-option value="entradaTardia">Entrada Tardía</ion-select-option>
+        <ion-select-option value="inasistencia">Inasistencia</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+    <ion-button expand="full" type="submit" [disabled]="!usuarioForm.valid">
+      Agregar Usuario
+    </ion-button>
+  </form>
+  
+
+  <ion-list>
+    <ion-item *ngFor="let registro of registrosAsistencia">
+      <ion-label>
+        <h2>{{ registro.docente }}</h2>
+        <p>{{ registro.tipoAsistencia }} a las {{ registro.horaEntrada | date: 'shortTime' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
